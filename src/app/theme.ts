@@ -18,6 +18,7 @@ const theme: ThemeScheme = {
 	},
 	text: {
 		color: {
+			primary: '#00a0ab',
 			contrast: '#2c2c2c',
 			default: '#8f8f8f'
 		},

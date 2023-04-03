@@ -5,15 +5,26 @@ import styled, { css } from 'styled-components';
 interface ITypographyProps {
 	children?: string;
 	weight?: number;
+	primary?: boolean;
 	contrast?: boolean;
-	size?: 'small' | 'medium' | 'large' | 'huge';
+	size?: 'small' | 'medium' | 'large' | 'huge' | string;
 }
 
 const StyledTypography = styled.span<ITypographyProps>`
 	display: inline-block;
 	font-weight: ${({ weight }) => weight || '500'};
-	color: ${({ contrast, theme }) =>
-		contrast ? theme.text.color.contrast : theme.text.color.default};
+	color: ${({ theme }) => theme.text.color.default};
+
+	${({ primary }) =>
+		primary &&
+		css`
+			color: ${({ theme }) => theme.text.color.primary};
+		`}
+	${({ contrast }) =>
+		contrast &&
+		css`
+			color: ${({ theme }) => theme.text.color.contrast};
+		`}
 
 	${({ size }) => {
 		switch (size) {
@@ -25,13 +36,17 @@ const StyledTypography = styled.span<ITypographyProps>`
 				return css`
 					font-size: ${({ theme }) => theme.text.size.large};
 				`;
+			case 'medium':
+				return css`
+					font-size: ${({ theme }) => theme.text.size.medium};
+				`;
 			case 'huge':
 				return css`
 					font-size: ${({ theme }) => theme.text.size.huge};
 				`;
 			default:
 				return css`
-					font-size: ${({ theme }) => theme.text.size.medium};
+					font-size: ${size};
 				`;
 		}
 	}}
@@ -39,6 +54,7 @@ const StyledTypography = styled.span<ITypographyProps>`
 
 const Typography: FC<ITypographyProps> = ({
 	children,
+	primary,
 	contrast,
 	weight,
 	size
@@ -48,6 +64,7 @@ const Typography: FC<ITypographyProps> = ({
 			weight={weight}
 			contrast={contrast}
 			size={size}
+			primary={primary}
 		>
 			{children}
 		</StyledTypography>

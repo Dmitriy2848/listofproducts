@@ -9,6 +9,7 @@ interface ISkeletonProps {
 	radius?: string;
 	bgColor?: string;
 	light?: boolean;
+	gridArea?: string;
 }
 
 const wave = keyframes`
@@ -22,12 +23,13 @@ const wave = keyframes`
 
 const StyledSkeleton = styled.div<ISkeletonProps>`
 	position: relative;
-	width: ${({ width }) => width || ''};
-	height: ${({ height }) => height || ''};
+	width: ${({ width }) => width || '100%'};
+	height: ${({ height }) => height || '100%'};
 	background-color: ${({ light, theme }) =>
 		light ? theme.palette.skeleton.light : theme.palette.skeleton.dark};
 	border-radius: ${({ radius }) => radius || '8px'};
 	overflow: hidden;
+	grid-area: ${({ gridArea }) => gridArea || ''};
 
 	&::before {
 		content: '';
@@ -45,13 +47,20 @@ const StyledSkeleton = styled.div<ISkeletonProps>`
 	}
 `;
 
-const Skeleton: FC<ISkeletonProps> = ({ width, height, radius, light }) => {
+const Skeleton: FC<ISkeletonProps> = ({
+	width,
+	height,
+	radius,
+	light,
+	gridArea
+}) => {
 	return (
 		<StyledSkeleton
 			width={width}
 			height={height}
 			radius={radius}
 			light={light}
+			gridArea={gridArea}
 		/>
 	);
 };

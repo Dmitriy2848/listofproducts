@@ -19,6 +19,7 @@ declare module 'styled-components' {
 		};
 		text: {
 			color: {
+				primary: string;
 				contrast: string;
 				default: string;
 			};

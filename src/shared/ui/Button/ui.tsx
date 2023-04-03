@@ -2,7 +2,13 @@ import { FC } from 'react';
 
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+interface IButtonProps {
+	children: string;
+	onClick?: () => void;
+	margin?: string;
+}
+
+const StyledButton = styled.button<IButtonProps>`
 	outline: none;
 	border: none;
 	cursor: pointer;
@@ -14,12 +20,15 @@ const StyledButton = styled.button`
 	border-radius: 45px;
 `;
 
-interface IButtonProps {
-	children: string;
-}
-
-const Button: FC<IButtonProps> = ({ children }) => {
-	return <StyledButton>{children}</StyledButton>;
+const Button: FC<IButtonProps> = ({ children, onClick, margin }) => {
+	return (
+		<StyledButton
+			onClick={onClick}
+			margin={margin}
+		>
+			{children}
+		</StyledButton>
+	);
 };
 
 export default Button;

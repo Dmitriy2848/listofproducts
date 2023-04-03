@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -14,6 +14,11 @@ const StyledLike = styled.button<ILikeProps>`
 	outline: none;
 	border: none;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+	padding: 0;
+	margin-left: auto;
+
 	svg {
 		min-width: 19px;
 		transition: 0.1s;
@@ -29,11 +34,13 @@ const StyledLike = styled.button<ILikeProps>`
 	}
 `;
 
-const Like: FC<ILikeProps> = ({ isActive, onClick }) => {
+const Like: FC = () => {
+	const [isLiked, setIsLiked] = useState(false);
+
 	return (
 		<StyledLike
-			aria-pressed={isActive}
-			onClick={onClick}
+			aria-pressed={isLiked}
+			onClick={() => setIsLiked(!isLiked)}
 		>
 			<Heart />
 		</StyledLike>
